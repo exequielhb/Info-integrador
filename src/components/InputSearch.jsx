@@ -1,5 +1,5 @@
 import { Input, Stack } from "@chakra-ui/react";
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Flex } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 import {
@@ -15,15 +15,19 @@ export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => 
     isRequired
     isInvalid={error}
     >
-      <Box maxW="sm">
-        <Stack spacing={3}>
+    <Flex justifyContent="center" alignItems="center">
+      <Box>
+        <Stack mt={10} spacing={4}>
           <Input
             type="text"
             placeholder="Buscar noticia..."
-            size="lg"
+            // medium size
             onChange={handleChange}
+            size="lg"
+            fontSize='2xl'
             background="white"
-
+            width={500}
+            height={58}
           />
 
           <Box
@@ -38,7 +42,9 @@ export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => 
               size="lg"
               onClick={handleSubmit}
               isDisabled={isDisabled}
-              width="40%"
+              textAlign="center"
+              mt={4}
+              mb={6}
             >
               Buscar
             </Button>
@@ -47,6 +53,7 @@ export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => 
           </Box>
         </Stack>
       </Box>
+    </Flex>
     </FormControl>
   );
 };

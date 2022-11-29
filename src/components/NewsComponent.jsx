@@ -2,10 +2,11 @@ import { InputSearch } from "./InputSearch"
 import { Loader } from "./Loader"
 import { CardNews } from "./CardNews"
 import { Pagination } from "./Pagination"
-import { Box, Divider, Text } from "@chakra-ui/react"
+import { Box, Divider, Text, Flex } from "@chakra-ui/react"
+
+import {Footer} from "./Footer"
 
 import { useState, useEffect } from "react"
-import { Footer } from "./Footer"
 
 
 export const NewsComponent = () => {
@@ -13,6 +14,7 @@ export const NewsComponent = () => {
     // api 693ce8a687394147a60502889ff25eec
     // fa6c9be845444f71adede2e299d69a13
     // 334397c99f564978987b9ba7fe5865b4
+    // 24adf08993c9408abbeb0173c3c3859f
 
     const [news, setNews] = useState([])
     const [loading, setLoading] = useState(false)
@@ -22,7 +24,7 @@ export const NewsComponent = () => {
     const [error, setError] = useState("")
     const [isDisabled, setIsDisabled] = useState(true)
 
-    const handleChange = (e) => {
+    const handleChange = e => {
 
         setSearch(e.target.value)
 
@@ -41,15 +43,15 @@ export const NewsComponent = () => {
         e.preventDefault()
         setPage(1)
         getNews()
+        // clear input
+        setSearch(" ")
     }
 
     const getNews = async () => {
         setLoading(true)
-        const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=334397c99f564978987b9ba7fe5865b4&page=${page}&pageSize=10&language=es`
+        const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=24adf08993c9408abbeb0173c3c3859f&page=${page}&pageSize=10&language=es`
         const resp = await fetch(url)
         const data = await resp.json()
-        // console.log(data.articles);
-        // console.log(data.totalResults);
 
         setNews(data.articles)
         setTotalPages(Math.ceil(data.totalResults / 10))
@@ -66,9 +68,8 @@ export const NewsComponent = () => {
 
   return (
     <>
-
     <Box
-    bg="blue.800"
+    height="100vh"
     >
 
      <InputSearch 
@@ -76,23 +77,36 @@ export const NewsComponent = () => {
         handleSubmit={handleSubmit}
         error={error}
         isDisabled={isDisabled}
-
-
      />
 
-     {/* total news */}
-        <Text
+     {/* agregamos loader al buscar una noticia */}
+        {loading && <Loader />}
+
+    {/* si no encuentra la noticia agregamos un mensjae */}
+        {news?.length === 0 && !loading && (
+            <Text
+            textAlign="center"
+            color="white"
+            fontSize="2xl"
+            fontWeight="bold"
+            >
+                No se encontraron noticias
+            </Text>
+        )}
+
+     {news?.length > 0 ?  (
+        <Box>
+
+            <Text
         color="white"
         textAlign="center"
         fontSize="2xl"
         fontWeight="bold"
         mt="4"
         >
-            Total de noticias: {totalPages * 10}
+            Está viendo: {news?.length} noticias de {totalPages} resultados
         </Text>
 
-     {news?.length > 0 ? (
-        <Box>
             {news.map((item, index) => {
                 return (
                         <CardNews 
@@ -105,25 +119,30 @@ export const NewsComponent = () => {
                         />
                 )
             })}
-        </Box>
 
-     ) : (
-            <Box>
-                <Text color="white" textAlign="center" fontSize="2xl" fontWeight="bold" mt="10">No hay resultados</Text>
-            </Box>
-     )}
-     
-
-     {/* pagination */}
         <Pagination
             page={page}
             setPage={setPage}
             totalPages={totalPages}
         />
+        </Box>
 
-        <Divider />
+     ) : (
+        <Text
+        textAlign="center"
+        color="white"
+        fontSize="2xl"
+        fontWeight="bold"
+        mt="10"
+        >
+            Empeza buscando una noticia
+        </Text>
+     ) } 
+     
 
-    <Footer />
+    {/* <Divider /> */}
+    {/* <Footer /> */}
+
     </Box>
     </>
   )
