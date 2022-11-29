@@ -1,6 +1,5 @@
 
 import { Flex, Icon  } from '@chakra-ui/react';
-
 import {FaNewspaper} from "react-icons/fa"
 
 

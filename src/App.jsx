@@ -1,20 +1,14 @@
 
-import { CardNews } from "./components/CardNews"
-import { InputSearch } from "./components/InputSearch"
-import { Loader } from "./components/Loader"
 import { Navbar } from "./components/Navbar"
-import { Pagination } from "./components/Pagination"
+import { NewsComponent } from "./components/NewsComponent"
 
 
 function App() {
 
   return (
     <>
-    <Navbar />
-    <InputSearch />
-    <Loader />
-    <CardNews />
-    <Pagination />
+      <Navbar />
+      <NewsComponent />
     </>
   )
 }

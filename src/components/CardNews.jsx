@@ -1,10 +1,20 @@
 import { Flex, Box, Link, Heading, Text } from '@chakra-ui/react'
+import { DateTime } from 'luxon';
 
-export const CardNews = () => {
+export const CardNews = ({title, description, url, urlToImage, publishedAt, key}) => {
+
+  const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
+  const time = DateTime.fromISO(publishedAt).toLocaleString(DateTime.TIME_SIMPLE);
+
+ 
+  
+
   return (
     <>
+
       <Flex
         p={50}
+        key={key}
         w="full"
         alignItems="center"
         justifyContent="center"
@@ -40,7 +50,7 @@ export const CardNews = () => {
               bgSize="cover"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80')",
+                  `url(${urlToImage})`,
               }}
             ></Box>
           </Box>
@@ -57,34 +67,29 @@ export const CardNews = () => {
             }}
           >
             <Heading
-              size="md"
+              as="h4"
+              size="lg"
+              fontWeight="extrabold"
+              letterSpacing="tight"
+              color="gray.900"
+              mb={3}
             >
-              Build Your New{" "}
-              <span
-                color="brand.600"
-                _dark={{
-                  color: "brand.400",
-                }}
-                query="Idea"
-              >
-                Idea
-              </span>
+              {title}
             </Heading>
+
+
             <Text
               mt={4}
               color="gray.600"
-              fontSize='lg'
+              fontSize="md"
               noOfLines={2}
             >
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
-              modi reprehenderit vitae exercitationem aliquid dolores ullam
-              temporibus enim expedita aperiam mollitia iure consectetur dicta
-              tenetur, porro consequuntur saepe accusantium consequatur.
+              {description}
             </Text>
 
             <Box mt={8}>
               <Text fontSize="md" color="gray.600" as='b'>
-                Publicado el: <span>20/20/20</span>
+                Publicado el: {date} a las {time} hs
               </Text>
             </Box>
           </Box>
