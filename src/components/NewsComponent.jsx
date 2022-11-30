@@ -2,7 +2,10 @@ import { InputSearch } from "./InputSearch"
 import { Loader } from "./Loader"
 import { CardNews } from "./CardNews"
 import { Pagination } from "./Pagination"
-import { Box, Divider, Text, Flex } from "@chakra-ui/react"
+import { Box, Text, Flex } from "@chakra-ui/react"
+
+import { ArrowUpIcon } from '@chakra-ui/icons';
+import { Button } from '@chakra-ui/react';
 
 import {Footer} from "./Footer"
 
@@ -23,6 +26,9 @@ export const NewsComponent = () => {
     const [search, setSearch] = useState("")
     const [error, setError] = useState("")
     const [isDisabled, setIsDisabled] = useState(true)
+
+    const [isVisible, setIsVisible] = useState(false);
+    
 
 
     const handleChange = e => {
@@ -58,18 +64,45 @@ export const NewsComponent = () => {
         setLoading(false)
     }
 
+    // ---------------------------
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      };
+
+      useEffect(() => {
+        const toggleVisibility = () => {
+          if (window.pageYOffset > 300) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+          }
+        };
+    
+        window.addEventListener('scroll', toggleVisibility);
+    
+        return () => window.removeEventListener('scroll', toggleVisibility);
+      }, []);
+
 
 
     useEffect(() => {
-        getNews()
+        getNews() 
+
     }, [page])
+
+    
+
 
 
 
   return (
     <>
-    <Box
-    >
+
+    <Flex direction="column" align="center" w="100%" h="100vh" >
 
      <InputSearch 
         handleChange={handleChange}
@@ -77,6 +110,24 @@ export const NewsComponent = () => {
         error={error}
         isDisabled={isDisabled}
      />
+
+     {/* ir arriba */}
+     {isVisible && (
+        <Button
+            onClick={scrollToTop}
+            position="fixed"
+            bottom="3rem"
+            right="2rem"
+            size="md"
+            colorScheme="teal"
+            aria-label="Ir arriba"
+            rounded={100}
+            zIndex={100}
+        >
+            <ArrowUpIcon />
+        </Button>
+
+     )}
 
      {/* agregamos loader al buscar una noticia */}
         {loading && <Loader />}
@@ -139,10 +190,9 @@ export const NewsComponent = () => {
      ) } 
      
 
-    {/* <Divider /> */}
-    {/* <Footer /> */}
+    <Footer />
 
-    </Box>
+    </Flex>
     </>
   )
 }

@@ -17,7 +17,9 @@ export const Pagination = ({page, setPage, totalPages}) => {
         }
 
     return (
-        <Flex justifyContent="center" my="4">
+        <Flex justifyContent="center" my="4"
+        mb={10}
+        >
             {page > 1 && (
                 <Button
                     onClick={() => setPage(page - 1)}
@@ -39,7 +41,7 @@ export const Pagination = ({page, setPage, totalPages}) => {
                     colorScheme="blue"
                     size="sm"
                     mx="1"
-                    mb={7}
+                    mb={10}
                 >
                     Siguiente
                 </Button>

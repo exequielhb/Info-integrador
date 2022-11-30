@@ -5,22 +5,15 @@ export const Footer = () => {
     <Flex
       bg="brand.nav"
       color="brand.secondary"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      padding="1.5rem"
+      padding="0.3rem"
       w="100%"
       bottom={0}
-      position="absolute"
+      position="fixed"
+      justifyContent="center"
     >
-      <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-          News App
-        </Heading>
-      </Flex>
 
       <Box>
-        <Text>© 2021 News App</Text>
+        <Text color="brand.buttonText" >© 2022 App Noticias</Text>
       </Box>
     </Flex>
   )

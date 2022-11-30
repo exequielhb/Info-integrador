@@ -5,6 +5,8 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #232946;
         font-family: 'League Spartan', sans-serif;
         height: 100vh;
+        /* display: flex;
+        flex-direction: column; */
     }
     a {
         text-decoration: none;

@@ -12,8 +12,6 @@ function App() {
       <Navbar />
       <NewsComponent />
       {/* footer */}
-      <Footer />
-
 
       <GlobalStyle />
     </>
