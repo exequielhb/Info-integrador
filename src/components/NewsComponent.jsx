@@ -24,8 +24,8 @@ export const NewsComponent = () => {
     const [error, setError] = useState("")
     const [isDisabled, setIsDisabled] = useState(true)
 
-    const handleChange = e => {
 
+    const handleChange = e => {
         setSearch(e.target.value)
 
         if (e.target.value.length < 3) {
@@ -37,19 +37,19 @@ export const NewsComponent = () => {
             setIsDisabled(false)
             return
         }
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setPage(1)
         getNews()
-        // clear input
-        setSearch(" ")
+
     }
 
     const getNews = async () => {
         setLoading(true)
-        const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=24adf08993c9408abbeb0173c3c3859f&page=${page}&pageSize=10&language=es`
+        const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=693ce8a687394147a60502889ff25eec&page=${page}&pageSize=10&language=es`
         const resp = await fetch(url)
         const data = await resp.json()
 
@@ -69,7 +69,6 @@ export const NewsComponent = () => {
   return (
     <>
     <Box
-    height="100vh"
     >
 
      <InputSearch 

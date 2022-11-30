@@ -1,4 +1,4 @@
-import { Flex, Box, Link, Heading, Text } from '@chakra-ui/react'
+import { Flex, Box, Heading, Text, Image, Link, Button  } from '@chakra-ui/react'
 import { DateTime } from 'luxon';
 
 export const CardNews = ({title, description, url, urlToImage, publishedAt, key}) => {
@@ -6,18 +6,16 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
   const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
   const time = DateTime.fromISO(publishedAt).toLocaleString(DateTime.TIME_SIMPLE);
 
- 
-  
-
   return (
     <>
 
-      <Flex
+  <Flex
         p={50}
         key={key}
         w="full"
         alignItems="center"
         justifyContent="center"
+        overflow="hidden"
       >
         <Box
           bg="white"
@@ -36,23 +34,18 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
         >
           <Box
             w={{
-              lg: "40%",
+              lg: "50%",
             }}
           >
-            <Box
-              h={{
-                base: 64,
-                lg: "full",
-              }}
-              rounded={{
-                lg: "lg",
-              }}
-              bgSize="cover"
-              style={{
-                backgroundImage:
-                  `url(${urlToImage})`,
-              }}
-            ></Box>
+          <Box h="100%" w="100%" position="relative">
+              {/* <Image boxSize='full' src={urlToImage} alt={title} objectFit="cover" /> */}
+              { urlToImage ? (
+                <Image boxSize="full" src={urlToImage} alt={title} objectFit="cover" />
+              ) : (
+                <Image boxSize="full" src="https://via.placeholder.com/400x300" alt={title} objectFit="cover" />
+              )}
+
+          </Box>
           </Box>
 
           <Box
@@ -62,10 +55,12 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
               base: "xl",
               lg: "5xl",
             }}
+            mx="auto"
             w={{
               lg: "50%",
             }}
           >
+
             <Heading
               as="h4"
               size="lg"
@@ -74,8 +69,11 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
               color="gray.900"
               mb={3}
             >
+              <Link href={url} isExternal style={{ textDecoration: 'none' }}>
               {title}
+              </Link>
             </Heading>
+
 
 
             <Text
@@ -87,14 +85,35 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
               {description}
             </Text>
 
-            <Box mt={8}>
+            <Box 
+              mt={4}
+            >
               <Text fontSize="md" color="gray.600" as='b'>
                 Publicado el: {date} a las {time} hs
               </Text>
             </Box>
+            <Link 
+            href={url} isExternal
+            style={{ textDecoration: 'none' }}
+            >
+                <Button
+                  mt={4}
+                  size="sm"
+                  rounded="full"
+                  px={6}
+                  bg="brand.button"
+                  color="brand.buttonText"
+                  _hover={{
+                    bg: "brand.buttonHover",
+                  }}
+                >
+                  Leer más
+                </Button>
+              </Link>
           </Box>
         </Box>
       </Flex>
+      
     </>
   );
 };

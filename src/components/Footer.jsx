@@ -1,20 +1,27 @@
-import { Box } from '@chakra-ui/react'
+import {Box, Flex, Heading, Image, Text, Link} from "@chakra-ui/react"
 
 export const Footer = () => {
   return (
-    // footer
-    <Box
-      as="footer"
+    <Flex
+      bg="brand.nav"
+      color="brand.secondary"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      padding="1.5rem"
       w="100%"
-      h="100px"
-      bg="gray.700"
-      color="white"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      fontSize="xl"
+      bottom={0}
+      position="absolute"
     >
-      <p>© 2021 - Todos los derechos reservados</p>
-    </Box>
-  );
+      <Flex align="center" mr={5}>
+        <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
+          News App
+        </Heading>
+      </Flex>
+
+      <Box>
+        <Text>© 2021 News App</Text>
+      </Box>
+    </Flex>
+  )
 };

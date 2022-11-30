@@ -1,5 +1,5 @@
-import { Input, Stack } from "@chakra-ui/react";
-import { Button, Box, Flex } from "@chakra-ui/react";
+import { Input, Stack, extendTheme  } from "@chakra-ui/react";
+import { Button, Box, Flex, Text } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 import {
@@ -9,6 +9,11 @@ import {
 
 
 export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => {
+
+  // clear input
+  const clearInput = () => {
+    document.getElementById("search").value = "";
+  }
 
   return (
     <FormControl 
@@ -24,10 +29,12 @@ export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => 
             // medium size
             onChange={handleChange}
             size="lg"
-            fontSize='2xl'
+            fontSize='3xl'
             background="white"
-            width={500}
-            height={58}
+            width={550}
+            id="search"
+            height={79}
+            mt={10}
           />
 
           <Box
@@ -38,15 +45,23 @@ export const InputSearch = ({handleChange, handleSubmit, error, isDisabled}) => 
           >
             <Button
               leftIcon={<SearchIcon />}
-              colorScheme="gray"
+              color="brand.buttonText"
+              _hover={{
+                bg: "brand.buttonHover",
+              }}
+              bg={'brand.button'}
               size="lg"
               onClick={handleSubmit}
               isDisabled={isDisabled}
               textAlign="center"
+              width={200}
+              fontSize='2xl'
+              height={59}
+              
               mt={4}
               mb={6}
             >
-              Buscar
+              <Text color='brand.buttonText'>Buscar</Text>
             </Button>
 
             <FormErrorMessage>{error}</FormErrorMessage>

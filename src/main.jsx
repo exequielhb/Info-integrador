@@ -7,9 +7,13 @@ import { extendTheme } from '@chakra-ui/react'
 
 const colors = {
   brand: {
-    violet: '#3F0071',
-    800: '#344D67',
-    700: '#2A3990',
+    nav: '#eebbc3',
+    button: "#eebbc3",
+    buttonHover: "#FF8787",
+    headText: "#fffffe",
+    buttonText: "#232946",
+    paragraph: "#b8c1ec",
+    secondary: "#fffffe",
   },
 }
 

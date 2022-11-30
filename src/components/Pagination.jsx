@@ -39,6 +39,7 @@ export const Pagination = ({page, setPage, totalPages}) => {
                     colorScheme="blue"
                     size="sm"
                     mx="1"
+                    mb={7}
                 >
                     Siguiente
                 </Button>
