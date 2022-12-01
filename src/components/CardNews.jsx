@@ -1,21 +1,23 @@
-import { Flex, Box, Heading, Text, Image, Link, Button  } from '@chakra-ui/react'
+import { Flex, Box, Heading, Text, Image, Button  } from '@chakra-ui/react'
 import { DateTime } from 'luxon';
+import { Link } from 'react-router-dom';
 
-export const CardNews = ({title, description, url, urlToImage, publishedAt, key}) => {
+export const CardNews = ({title, description, urlToImage, publishedAt, myKey}) => {
 
   const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
   const time = DateTime.fromISO(publishedAt).toLocaleString(DateTime.TIME_SIMPLE);
+
 
   return (
     <>
 
   <Flex
         p={50}
-        key={key}
         w="full"
         alignItems="center"
         justifyContent="center"
         overflow="hidden"
+        key={myKey}
       >
         <Box
           bg="white"
@@ -31,6 +33,7 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
           rounded={{
             lg: "lg",
           }}
+
         >
           <Box
             w={{
@@ -38,7 +41,6 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
             }}
           >
           <Box h="100%" w="100%" position="relative">
-              {/* <Image boxSize='full' src={urlToImage} alt={title} objectFit="cover" /> */}
               { urlToImage ? (
                 <Image boxSize="full" src={urlToImage} alt={title} objectFit="cover" />
               ) : (
@@ -69,9 +71,10 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
               color="gray.900"
               mb={3}
             >
-              <Link href={url} isExternal style={{ textDecoration: 'none' }}>
-              {title}
+              <Link to={`/news/${myKey}`} target="_blank" >
+                {title}
               </Link>
+              
             </Heading>
 
 
@@ -92,10 +95,6 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
                 Publicado el: {date} a las {time} hs
               </Text>
             </Box>
-            <Link 
-            href={url} isExternal
-            style={{ textDecoration: 'none' }}
-            >
                 <Button
                   mt={4}
                   size="sm"
@@ -107,9 +106,10 @@ export const CardNews = ({title, description, url, urlToImage, publishedAt, key}
                     bg: "brand.buttonHover",
                   }}
                 >
+                  <Link to={`/news/${myKey}`} target="_blank" >
                   Leer más
+                  </Link>
                 </Button>
-              </Link>
           </Box>
         </Box>
       </Flex>

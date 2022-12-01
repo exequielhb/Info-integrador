@@ -10,6 +10,9 @@ import { Button } from '@chakra-ui/react';
 import {Footer} from "./Footer"
 
 import { useState, useEffect } from "react"
+import { Navbar } from "./Navbar"
+
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const NewsComponent = () => {
@@ -28,7 +31,6 @@ export const NewsComponent = () => {
     const [isDisabled, setIsDisabled] = useState(true)
 
     const [isVisible, setIsVisible] = useState(false);
-    
 
 
     const handleChange = e => {
@@ -57,11 +59,20 @@ export const NewsComponent = () => {
         setLoading(true)
         const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=693ce8a687394147a60502889ff25eec&page=${page}&pageSize=10&language=es`
         const resp = await fetch(url)
+
         const data = await resp.json()
 
+
+        // console.log(data.articles)
+
         setNews(data.articles)
+
         setTotalPages(Math.ceil(data.totalResults / 10))
+
         setLoading(false)
+
+
+
     }
 
     // ---------------------------
@@ -92,6 +103,7 @@ export const NewsComponent = () => {
     useEffect(() => {
         getNews() 
 
+
     }, [page])
 
     
@@ -99,10 +111,14 @@ export const NewsComponent = () => {
 
 
 
+
   return (
     <>
 
+    <Navbar />
+    
     <Flex direction="column" align="center" w="100%" h="100vh" >
+
 
      <InputSearch 
         handleChange={handleChange}
@@ -157,15 +173,16 @@ export const NewsComponent = () => {
             Está viendo: {news?.length} noticias de {totalPages} resultados
         </Text>
 
-            {news.map((item, index) => {
+            {news.map((item) => {
                 return (
                         <CardNews 
                             title={item.title}
                             description={item.description}
-                            url={item.url}
                             urlToImage={item.urlToImage}
                             publishedAt={item.publishedAt}
-                            key={index}
+                            myKey={uuidv4()}
+
+
                         />
                 )
             })}
