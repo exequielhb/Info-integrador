@@ -1,8 +1,9 @@
 import { Flex, Box, Heading, Text, Image, Button  } from '@chakra-ui/react'
 import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
+import { ModalNew } from './ModalNew';
 
-export const CardNews = ({title, description, urlToImage, publishedAt, myKey}) => {
+export const CardNews = ({title, description, urlToImage, publishedAt, myKey, url, author}) => {
 
   const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
   const time = DateTime.fromISO(publishedAt).toLocaleString(DateTime.TIME_SIMPLE);
@@ -95,21 +96,14 @@ export const CardNews = ({title, description, urlToImage, publishedAt, myKey}) =
                 Publicado el: {date} a las {time} hs
               </Text>
             </Box>
-                <Button
-                  mt={4}
-                  size="sm"
-                  rounded="full"
-                  px={6}
-                  bg="brand.button"
-                  color="brand.buttonText"
-                  _hover={{
-                    bg: "brand.buttonHover",
-                  }}
-                >
-                  <Link to={`/news/${myKey}`} target="_blank" >
-                  Leer más
-                  </Link>
-                </Button>
+              <ModalNew
+                title={title}
+                description={description}
+                urlToImage={urlToImage}
+                url={url}
+                author={author}
+
+              />
           </Box>
         </Box>
       </Flex>

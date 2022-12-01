@@ -181,7 +181,8 @@ export const NewsComponent = () => {
                             urlToImage={item.urlToImage}
                             publishedAt={item.publishedAt}
                             myKey={uuidv4()}
-
+                            url={item.url}
+                            author={item.author}
 
                         />
                 )
