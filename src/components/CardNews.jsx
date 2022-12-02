@@ -1,18 +1,27 @@
-import { Flex, Box, Heading, Text, Image, Button  } from '@chakra-ui/react'
-import { DateTime } from 'luxon';
-import { Link } from 'react-router-dom';
-import { ModalNew } from './ModalNew';
+import { Flex, Box, Heading, Text, Image } from "@chakra-ui/react";
+import { DateTime } from "luxon";
+import { Link } from "react-router-dom";
+import { ModalNew } from "./ModalNew";
 
-export const CardNews = ({title, description, urlToImage, publishedAt, myKey, url, author}) => {
-
+export const CardNews = ({
+  title,
+  description,
+  urlToImage,
+  publishedAt,
+  myKey,
+  url,
+  author,
+  content,
+}) => {
+  
   const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
-  const time = DateTime.fromISO(publishedAt).toLocaleString(DateTime.TIME_SIMPLE);
-
+  const time = DateTime.fromISO(publishedAt).toLocaleString(
+    DateTime.TIME_SIMPLE
+  );
 
   return (
     <>
-
-  <Flex
+      <Flex
         p={50}
         w="full"
         alignItems="center"
@@ -34,21 +43,29 @@ export const CardNews = ({title, description, urlToImage, publishedAt, myKey, ur
           rounded={{
             lg: "lg",
           }}
-
         >
           <Box
             w={{
               lg: "50%",
             }}
           >
-          <Box h="100%" w="100%" position="relative">
-              { urlToImage ? (
-                <Image boxSize="full" src={urlToImage} alt={title} objectFit="cover" />
+            <Box h="100%" w="100%" position="relative">
+              {urlToImage ? (
+                <Image
+                  boxSize="full"
+                  src={urlToImage}
+                  alt={title}
+                  objectFit="cover"
+                />
               ) : (
-                <Image boxSize="full" src="https://via.placeholder.com/400x300" alt={title} objectFit="cover" />
+                <Image
+                  boxSize="full"
+                  src="https://via.placeholder.com/400x300"
+                  alt={title}
+                  objectFit="cover"
+                />
               )}
-
-          </Box>
+            </Box>
           </Box>
 
           <Box
@@ -63,7 +80,6 @@ export const CardNews = ({title, description, urlToImage, publishedAt, myKey, ur
               lg: "50%",
             }}
           >
-
             <Heading
               as="h4"
               size="lg"
@@ -72,42 +88,30 @@ export const CardNews = ({title, description, urlToImage, publishedAt, myKey, ur
               color="gray.900"
               mb={3}
             >
-              <Link to={`/news/${myKey}`} target="_blank" >
+              <Link to={`/news/${myKey}`} target="_blank">
                 {title}
               </Link>
-              
             </Heading>
 
-
-
-            <Text
-              mt={4}
-              color="gray.600"
-              fontSize="md"
-              noOfLines={2}
-            >
+            <Text mt={4} color="gray.600" fontSize="md" noOfLines={2}>
               {description}
             </Text>
 
-            <Box 
-              mt={4}
-            >
-              <Text fontSize="md" color="gray.600" as='b'>
+            <Box mt={4}>
+              <Text fontSize="md" color="gray.600" as="b">
                 Publicado el: {date} a las {time} hs
               </Text>
             </Box>
-              <ModalNew
-                title={title}
-                description={description}
-                urlToImage={urlToImage}
-                url={url}
-                author={author}
-
-              />
+            <ModalNew
+              title={title}
+              content={content}
+              urlToImage={urlToImage}
+              url={url}
+              author={author}
+            />
           </Box>
         </Box>
       </Flex>
-      
     </>
   );
 };

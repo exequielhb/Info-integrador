@@ -183,6 +183,7 @@ export const NewsComponent = () => {
                             myKey={uuidv4()}
                             url={item.url}
                             author={item.author}
+                            content={item.content}
 
                         />
                 )

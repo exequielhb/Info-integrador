@@ -1,4 +1,4 @@
-import {Box, Flex, Heading, Image, Text, Link} from "@chakra-ui/react"
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 export const Footer = () => {
   return (
@@ -11,10 +11,9 @@ export const Footer = () => {
       position="fixed"
       justifyContent="center"
     >
-
       <Box>
-        <Text color="brand.buttonText" >© 2022 App Noticias</Text>
+        <Text color="brand.buttonText">© 2022 App Noticias</Text>
       </Box>
     </Flex>
-  )
+  );
 };
