@@ -13,7 +13,6 @@ export const CardNews = ({
   author,
   content,
 }) => {
-  
   const date = DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_MED);
   const time = DateTime.fromISO(publishedAt).toLocaleString(
     DateTime.TIME_SIMPLE
