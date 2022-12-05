@@ -25,6 +25,8 @@ export const NewsComponent = () => {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  const API = "fa6e00d5edeb46cbb6c7f432f50ee6e6"
+
   const handleChange = (e) => {
     setSearch(e.target.value);
 
@@ -47,7 +49,7 @@ export const NewsComponent = () => {
 
   const getNews = async () => {
     setLoading(true);
-    const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=fa6c9be845444f71adede2e299d69a13&page=${page}&pageSize=10&language=es`;
+    const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=${API}&page=${page}&pageSize=10&language=es`;
     const resp = await fetch(url);
 
     const data = await resp.json();
